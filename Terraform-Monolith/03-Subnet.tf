@@ -8,7 +8,7 @@ resource "aws_subnet" "Monolith_pub_subnet_2a" {
   tags = {
     Name                                      = "Monolith_pub_subnet-2a"
     "kubernetes.io/role/elb"                 = "1"
-    "kubernetes.io/cluster/Monolith-Cluster" = "shared"
+    "kubernetes.io/cluster/Monolith_eks_cluster" = "shared"
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "Monolith_pub_subnet_2c" {
   tags = {
     Name                                      = "Monolith_pub_subnet-2c"
     "kubernetes.io/role/elb"                 = "1"
-    "kubernetes.io/cluster/Monolith-Cluster" = "shared"
+    "kubernetes.io/cluster/Monolith_eks_cluster" = "shared"
   }
 }
 
@@ -35,6 +35,7 @@ resource "aws_subnet" "Monolith_pri_subnet_2a" {
   tags = {
     Name                                      = "Monolith_pri_subnet-2a"
     "kubernetes.io/role/internal-elb"        = "1"
+    "kubernetes.io/cluster/Monolith_eks_cluster" = "shared"
   }
 }
 
@@ -47,5 +48,6 @@ resource "aws_subnet" "Monolith_pri_subnet_2c" {
   tags = {
     Name                                      = "Monolith_pri_subnet-2c"
     "kubernetes.io/role/internal-elb"        = "1"
+    "kubernetes.io/cluster/Monolith_eks_cluster" = "shared"
   }
 }
