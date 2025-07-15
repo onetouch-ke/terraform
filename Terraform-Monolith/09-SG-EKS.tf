@@ -64,6 +64,14 @@ resource "aws_security_group" "Monolith_sg_eks_node_group" {
     description = "for HTTPS"
   }
 
+  ingress {
+    from_port   = 1025
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "for HTTPS"
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -71,4 +79,3 @@ resource "aws_security_group" "Monolith_sg_eks_node_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
