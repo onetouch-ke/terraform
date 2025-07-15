@@ -11,7 +11,7 @@ resource "aws_eip" "Monolith_eip_2c" {
 # NAT 게이트웨이
 resource "aws_nat_gateway" "Monolith_ngw_2a" {
   allocation_id = aws_eip.Monolith_eip_2a.id
-  subnet_id     = aws_subnet.Monolith_pri_subnet_2a.id
+  subnet_id     = aws_subnet.Monolith_pub_subnet_2a.id
   tags = {
     "Name" = "Monolith_ngw_2a"
   }
@@ -19,7 +19,7 @@ resource "aws_nat_gateway" "Monolith_ngw_2a" {
 
 resource "aws_nat_gateway" "Monolith_ngw_2c" {
   allocation_id = aws_eip.Monolith_eip_2c.id
-  subnet_id     = aws_subnet.Monolith_pri_subnet_2c.id
+  subnet_id     = aws_subnet.Monolith_pub_subnet_2c.id
   tags = {
     "Name" = "Monolith_ngw_2c"
   }
