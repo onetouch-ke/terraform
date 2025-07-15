@@ -51,3 +51,4 @@ resource "aws_subnet" "Monolith_pri_subnet_2c" {
     "kubernetes.io/cluster/Monolith_eks_cluster" = "shared"
   }
 }
+
