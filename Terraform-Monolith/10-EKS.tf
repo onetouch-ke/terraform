@@ -37,7 +37,7 @@ resource "aws_eks_cluster" "Monolith_eks_cluster" {
   version = "1.32" # 최신버전은 에러 발생 하는 경우도 있음 
 
   vpc_config {
-    subnet_ids              = [aws_subnet.Monolith_pri_subnet_2a.id, aws_subnet.Monolith_pri_subnet_2c.id]
+    subnet_ids              = [aws_subnet.Monolith_pri_subnet_2a.id, aws_subnet.Monolith_pri_subnet_2c.id, aws_subnet.Monolith_pub_subnet_2a, aws_subnet.Monolith_pub_subnet_2c]
     endpoint_public_access  = true
     endpoint_private_access = false
     security_group_ids      = [aws_security_group.Monolith_sg_eks_node_group.id]
