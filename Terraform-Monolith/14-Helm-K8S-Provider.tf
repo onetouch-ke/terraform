@@ -1,7 +1,3 @@
-data "aws_eks_cluster" "main" {
-  name = aws_eks_cluster.MSA_eks_cluster.name
-}
-
 data "aws_eks_cluster_auth" "auth" {
   name = aws_eks_cluster.MSA_eks_cluster.name
 }
