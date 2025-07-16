@@ -73,7 +73,7 @@ resource "aws_db_parameter_group" "MSA_mariadb_parameter_group" {
 
 # RDS 생성
 resource "aws_db_instance" "MSA_mariadb_rds" {
-  identifier_prefix    = "MSA_mariadb_rds"
+  identifier_prefix    = "msa-mariadb-rds"
   allocated_storage    = 10
   engine               = "mariadb"
   engine_version       = "10.11.8"
