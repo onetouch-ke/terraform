@@ -1,3 +1,7 @@
+data "aws_iam_role" "alb_controller" {
+  name = "alb-controller-irsa-role"
+}
+
 resource "helm_release" "alb_controller" {
   name       = "alb-controller"
   chart      = "${path.module}/../alb-controller"
