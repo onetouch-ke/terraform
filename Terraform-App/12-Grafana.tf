@@ -4,5 +4,4 @@ resource "helm_release" "grafana" {
   chart      = "grafana"
   namespace  = "monitoring"
   create_namespace = true
-  depends_on = [ kubernetes_namespace.monitoring ]
 }
