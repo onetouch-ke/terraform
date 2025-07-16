@@ -81,7 +81,7 @@ resource "aws_db_instance" "MSA_mariadb_rds" {
   db_name              = "MSA_mariadb_rds" # 영문자로 시작해야 하며 영문자와 숫자, _만 가능
   username             = "MSA_User"
   password             = "Passw0rd" # 8자 이상, 영문 대소문자, 숫자 및 특수 문자를 혼합하여 사용
-  parameter_group_name = "MSA_mariadb_parameter_group"
+  parameter_group_name = "msa-mariadb-parameter-group"
   skip_final_snapshot  = true
   #multi_az               = true
   db_subnet_group_name   = aws_db_subnet_group.MSA_rds_subnet_group.name
