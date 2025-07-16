@@ -1,6 +1,10 @@
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+}
+
 resource "aws_s3_bucket" "ecr_archive_bucket" {
-  bucket        = "my-ecr-archive-bucket" # 버킷 이름은 전역 고유해야 함
-  force_destroy = true                    # 버킷 내 객체까지 함께 삭제
+  bucket        = "ecr-archive-${random_id.bucket_suffix.hex}"
+  force_destroy = true
 
   tags = {
     Name        = "ECR Archive Bucket"
@@ -8,7 +12,6 @@ resource "aws_s3_bucket" "ecr_archive_bucket" {
   }
 }
 
-# 선택: 버전 관리 설정
 resource "aws_s3_bucket_versioning" "ecr_archive_versioning" {
   bucket = aws_s3_bucket.ecr_archive_bucket.id
 
@@ -17,7 +20,6 @@ resource "aws_s3_bucket_versioning" "ecr_archive_versioning" {
   }
 }
 
-# 선택: 서버측 암호화 설정
 resource "aws_s3_bucket_server_side_encryption_configuration" "ecr_archive_encryption" {
   bucket = aws_s3_bucket.ecr_archive_bucket.id
 
