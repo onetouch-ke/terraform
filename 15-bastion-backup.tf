@@ -5,7 +5,11 @@ resource "aws_backup_vault" "bastion_backup_vault" {
 
 # 2. Backup Plan
 resource "aws_backup_plan" "bastion_backup_plan" {
-  name = "bastion-backup-plan"
+  name = "bastion-backup-plan-5m"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   rule {
     rule_name         = "every-5-minutes-backup"
