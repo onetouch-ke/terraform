@@ -6,12 +6,12 @@ resource "helm_release" "alb_controller" {
 
   set {
     name  = "clusterName"
-    value = aws_eks_cluster.Monolith_eks_cluster.name
+    value = aws_eks_cluster.MSA_eks_cluster.name
   }
 
   set {
     name  = "vpcId"
-    value = aws_eks_cluster.Monolith_eks_cluster.vpc_config[0].vpc_id
+    value = aws_eks_cluster.MSA_eks_cluster.vpc_config[0].vpc_id
   }
 
   set {

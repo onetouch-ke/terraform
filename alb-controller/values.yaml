@@ -1,6 +1,6 @@
-clusterName: MSA-cluster #실제 클러스터 이름
+clusterName: ""
 region: ap-northeast-2
-vpcId: vpc-0551e81e8154766bb  # 실제 VPC ID로 변경하세요
+vpcId: ""
 
 albController:
   image: lsh5224/aws-lb-controller:v2.7.1
@@ -12,7 +12,7 @@ serviceAccount:
   create: true
   name: aws-load-balancer-controller
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::340822111750:role/alb-controller-irsa-role"
+    eks.amazonaws.com/role-arn: ""
 
 webhook:
   certSecretName: aws-load-balancer-webhook-tls

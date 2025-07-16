@@ -1,9 +1,9 @@
-resource "aws_security_group" "Monolith_sg_rds" {
-  name        = "Monolith_sg_rds"
+resource "aws_security_group" "MSA_sg_rds" {
+  name        = "MSA_sg_rds"
   description = "for Bastion Server"
-  vpc_id      = aws_vpc.Monolith_vpc.id
+  vpc_id      = aws_vpc.MSA_vpc.id
   tags = {
-    "Name" = "Monolith_sg_rds"
+    "Name" = "MSA_sg_rds"
   }
   
   ingress {

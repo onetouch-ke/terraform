@@ -47,11 +47,11 @@ resource "aws_iam_instance_profile" "bastion_profile" {
   role = aws_iam_role.bastion_eks_role.name
 }
 
-resource "aws_instance" "Monolith_pub_ec2_bastion_2a" {
+resource "aws_instance" "MSA_pub_ec2_bastion_2a" {
   ami                         = "ami-056a29f2eddc40520"
   instance_type               = "t2.micro"
-  vpc_security_group_ids      = [aws_security_group.Monolith_sg_bastion.id]
-  subnet_id                   = aws_subnet.Monolith_pub_subnet_2a.id
+  vpc_security_group_ids      = [aws_security_group.MSA_sg_bastion.id]
+  subnet_id                   = aws_subnet.MSA_pub_subnet_2a.id
   key_name                    = "tg-01"
   associate_public_ip_address = true
 
@@ -78,7 +78,7 @@ resource "aws_instance" "Monolith_pub_ec2_bastion_2a" {
               # Kubeconfig 연결
               /usr/local/bin/aws eks update-kubeconfig \
                 --region ap-northeast-2 \
-                --name ${aws_eks_cluster.Monolith_eks_cluster.name}
+                --name ${aws_eks_cluster.MSA_eks_cluster.name}
 
               # 실행 결과 로그 저장
               echo "---- kubectl ----" > /home/ubuntu/setup.log
@@ -91,11 +91,11 @@ resource "aws_instance" "Monolith_pub_ec2_bastion_2a" {
     volume_size = "8"
     volume_type = "gp2"
     tags = {
-      "Name" = "Monolith_pub_ec2_bastion_2a"
+      "Name" = "MSA_pub_ec2_bastion_2a"
     }
   }
 
   tags = {
-    "Name" = "Monolith_pub_ec2_bastion_2a"
+    "Name" = "MSA_pub_ec2_bastion_2a"
   }
 }

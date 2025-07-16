@@ -1,7 +1,7 @@
 # ALB SG
-resource "aws_security_group" "Monolith_sg_alb" {
+resource "aws_security_group" "MSA_sg_alb" {
   name   = "for ALB"
-  vpc_id = aws_vpc.Monolith_vpc.id
+  vpc_id = aws_vpc.MSA_vpc.id
 
   ingress {
     from_port   = 80
@@ -28,9 +28,9 @@ resource "aws_security_group" "Monolith_sg_alb" {
 }
 
 # EKS SG
-resource "aws_security_group" "Monolith_sg_eks_node_group" {
+resource "aws_security_group" "MSA_sg_eks_node_group" {
   name   = "for EKS_managed server"
-  vpc_id = aws_vpc.Monolith_vpc.id
+  vpc_id = aws_vpc.MSA_vpc.id
 
   ingress {
     from_port   = -1

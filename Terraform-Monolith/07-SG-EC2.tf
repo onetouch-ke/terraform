@@ -1,10 +1,10 @@
 # Bastion SG
-resource "aws_security_group" "Monolith_sg_bastion" {
-  name        = "Monolith_sg_bastion"
+resource "aws_security_group" "MSA_sg_bastion" {
+  name        = "MSA_sg_bastion"
   description = "for Bastion Server"
-  vpc_id      = aws_vpc.Monolith_vpc.id
+  vpc_id      = aws_vpc.MSA_vpc.id
   tags = {
-    "Name" = "Monolith_sg_bastion"
+    "Name" = "MSA_sg_bastion"
   }
 
   ingress {
