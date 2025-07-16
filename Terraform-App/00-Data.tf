@@ -10,7 +10,3 @@ data "aws_eks_node_group" "MSA_eks_node_group" {
   cluster_name    = data.aws_eks_cluster.MSA_eks_cluster.name
   node_group_name = "MSA_eks_node_group"   # 실제 NodeGroup 이름
 }
-
-data "aws_iam_role" "alb_controller" {
-  name = "alb_controller"   # 실제 Role 이름
-}

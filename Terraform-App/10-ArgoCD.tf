@@ -13,4 +13,8 @@ resource "helm_release" "argocd" {
     name  = "server.insecure"
     value = "true"
   }
+  set {
+    name  = "installCRDs"
+    value = "true"
+  }
 }
