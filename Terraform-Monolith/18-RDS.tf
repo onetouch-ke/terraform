@@ -52,7 +52,7 @@ resource "aws_db_instance" "monolith_rds" {
 
   # 자동 백업 설정 (UTC 기준 → KST 오후 7시 → UTC 오전 10시)
   backup_retention_period = 7
-  preferred_backup_window = "10:00-11:00"
+  #   preferred_backup_window = "10:00-11:00"
 
   deletion_protection = false
 
