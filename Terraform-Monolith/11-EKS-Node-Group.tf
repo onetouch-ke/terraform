@@ -39,7 +39,7 @@ resource "aws_eks_node_group" "Monolith_eks_node_group" {
   subnet_ids      = [aws_subnet.Monolith_pri_subnet_2a.id, aws_subnet.Monolith_pri_subnet_2c.id]
 
   tags = {
-    "k8s.io/cluster_autoscaler/enabled"               = "true"
+    "k8s.io/cluster_autoscaler/enabled"              = "true"
     "k8s.io/cluster_autoscaler/Monolith_eks_cluster" = "owned"
   }
 
@@ -59,3 +59,4 @@ resource "aws_eks_node_group" "Monolith_eks_node_group" {
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
   ]
 }
+
