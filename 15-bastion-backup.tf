@@ -8,16 +8,17 @@ resource "aws_backup_plan" "bastion_backup_plan" {
   name = "bastion-backup-plan"
 
   rule {
-    rule_name         = "daily-backup"
+    rule_name         = "every-10-minutes-backup"
     target_vault_name = aws_backup_vault.bastion_backup_vault.name
-    schedule          = "cron(0 12 * * ? *)" # 매일 오후 9시(KST) = UTC+9
-    start_window      = 60
-    completion_window = 180
+    schedule          = "cron(0/10 * * * ? *)" # 매 10분마다
+    start_window      = 10
+    completion_window = 30
     lifecycle {
-      delete_after = 30 # 30일 후 자동 삭제
+      delete_after = 1 # 테스트용으로 1일 후 삭제
     }
   }
 }
+
 
 # 3. Backup Selection (EC2 인스턴스 자체를 대상으로 지정)
 resource "aws_backup_selection" "bastion_selection" {
