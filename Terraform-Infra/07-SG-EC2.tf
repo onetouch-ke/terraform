@@ -54,3 +54,4 @@ resource "aws_security_group" "MSA_sg_bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
