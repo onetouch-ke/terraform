@@ -1,6 +1,6 @@
 # RDS 서브넷 그룹 생성
 resource "aws_db_subnet_group" "MSA_rds_subnet_group" {
-  name       = "MSA_rds_subnet_group"
+  name       = "msa_rds_subnet_group"
   subnet_ids = [aws_subnet.MSA_pri_subnet_2a.id, aws_subnet.MSA_pri_subnet_2c.id]
 
   tags = {
@@ -10,7 +10,7 @@ resource "aws_db_subnet_group" "MSA_rds_subnet_group" {
 
 # MariaDB Parameter Group 설정
 resource "aws_db_parameter_group" "MSA_mariadb_parameter_group" {
-  name        = "MSA_mariadb_parameter_group"
+  name        = "msa-mariadb-parameter-group"
   family      = "mariadb10.11" # 사용 중인 MariaDB 버전에 맞게 조정
   description = "Custom parameter group for MariaDB"
 
