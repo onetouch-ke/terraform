@@ -3,7 +3,7 @@ resource "aws_instance" "Monolith_pub_ec2_bastion_2a" {
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.Monolith_sg_bastion.id]
   subnet_id                   = aws_subnet.Monolith_pub_subnet_2a.id
-  key_name                    = "tg-01"
+  key_name                    = "newkey"
   associate_public_ip_address = true
 
   root_block_device {
