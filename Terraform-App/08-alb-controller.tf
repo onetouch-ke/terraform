@@ -6,16 +6,16 @@ resource "helm_release" "alb_controller" {
 
   set {
     name  = "clusterName"
-    value = aws_eks_cluster.MSA_eks_cluster.name
+    value = data.aws_eks_cluster.MSA_eks_cluster.name
   }
 
   set {
     name  = "vpcId"
-    value = aws_eks_cluster.MSA_eks_cluster.vpc_config[0].vpc_id
+    value = data.aws_eks_cluster.MSA_eks_cluster.vpc_config[0].vpc_id
   }
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = aws_iam_role.alb_controller.arn
+    value = data.aws_iam_role.alb_controller.arn
   }
 }
