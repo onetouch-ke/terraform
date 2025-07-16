@@ -8,9 +8,9 @@ resource "aws_backup_plan" "bastion_backup_plan" {
   name = "bastion-backup-plan"
 
   rule {
-    rule_name         = "every-10-minutes-backup"
+    rule_name         = "every-5-minutes-backup"
     target_vault_name = aws_backup_vault.bastion_backup_vault.name
-    schedule          = "cron(0/10 * * * ? *)" # 매 10분마다
+    schedule          = "cron(0/5 * * * ? *)" # 매 5분마다
     start_window      = 10
     completion_window = 30
     lifecycle {
