@@ -1,7 +1,3 @@
-data "aws_iam_role" "alb_controller" {
-  name = "alb-controller-irsa-role"
-}
-
 resource "helm_release" "alb_controller" {
   name       = "alb-controller"
   chart      = "${path.module}/../alb-controller"
@@ -20,6 +16,6 @@ resource "helm_release" "alb_controller" {
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = data.aws_iam_role.alb_controller.arn
+    value = aws_iam_role.alb_controller.arn
   }
 }
