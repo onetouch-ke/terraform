@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+      - name: users
+        image: "{{ .Values.backend.users.image }}:{{ .Values.backend.users.tag }}"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.backend.users.port }}
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mariadb://151911ff-5259-4866-8abf-2417c4ff54d2.internal.kr1.mariadb.rds.nhncloudservice.com/UsersService
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "{{ .Values.mariadb.userName }}"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "{{ .Values.mariadb.rootPassword }}"
+      imagePullSecrets:
+      - name: ecr-secret
