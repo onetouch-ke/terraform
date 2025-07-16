@@ -15,8 +15,8 @@ resource "aws_backup_plan" "bastion_backup_plan" {
     rule_name         = "every-1-hour-backup"
     target_vault_name = aws_backup_vault.bastion_backup_vault.name
     schedule          = "cron(0 * * * ? *)" # 정각마다
-    start_window      = 10
-    completion_window = 30
+    start_window      = 65
+    completion_window = 180
     lifecycle {
       delete_after = 1 # 테스트용으로 1일 후 삭제
     }
