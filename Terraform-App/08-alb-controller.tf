@@ -1,9 +1,8 @@
 resource "helm_release" "alb_controller" {
   name       = "alb-controller"
-  chart      = "${path.module}/../alb-controller"
+  chart      = "https://aws.github.io/eks-charts"
   namespace  = "kube-system"
-  create_namespace = true
-
+  
   set {
     name  = "clusterName"
     value = data.aws_eks_cluster.MSA_eks_cluster.name
