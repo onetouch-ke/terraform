@@ -6,7 +6,7 @@ resource "aws_cloudwatch_event_rule" "ecr_push_users" {
     "detail-type": ["ECR Image Action"],
     "detail": {
       "action-type": ["PUSH"],
-      "repository-name": ["multi-backend-users"]
+      "repository-name": ["multi_backend_users"]
     }
   })
 }

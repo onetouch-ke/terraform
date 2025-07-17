@@ -6,7 +6,7 @@ resource "aws_cloudwatch_event_rule" "ecr_push_frontend" {
     "detail-type": ["ECR Image Action"],
     "detail": {
       "action-type": ["PUSH"],
-      "repository-name": ["multi-frontend"]
+      "repository-name": ["multi_frontend"]
     }
   })
 }
