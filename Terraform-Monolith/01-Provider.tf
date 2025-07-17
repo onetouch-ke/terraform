@@ -1,3 +1,4 @@
+# 0717 작업 시작
 terraform {
   required_version = ">= 1.0.0, <2.0.0"
 
