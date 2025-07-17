@@ -52,8 +52,9 @@ resource "aws_instance" "MSA_pub_ec2_bastion_2a" {
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.MSA_sg_bastion.id]
   subnet_id                   = aws_subnet.MSA_pub_subnet_2a.id
-  key_name                    = "ch-01"
+  key_name                    = "tg-01"
   associate_public_ip_address = true
+  iam_instance_profile    = aws_iam_instance_profile.bastion_profile.name
 
   user_data = <<-EOF
               #!/bin/bash
@@ -78,7 +79,14 @@ resource "aws_instance" "MSA_pub_ec2_bastion_2a" {
               # Kubeconfig 연결
               /usr/local/bin/aws eks update-kubeconfig \
                 --region ap-northeast-2 \
-                --name ${aws_eks_cluster.MSA_eks_cluster.name}
+                --name ${aws_eks_cluster.MSA_eks_cluster.name} \
+                --kubeconfig /home/ubuntu/.kube/config
+              
+              chown ubuntu:ubuntu /home/ubuntu/.kube/config
+
+              # cert-manager CRD 설치
+              kubectl create -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.crds.yaml \
+                --kubeconfig /home/ubuntu/.kube/config
 
               # 실행 결과 로그 저장
               echo "---- kubectl ----" > /home/ubuntu/setup.log
@@ -98,4 +106,6 @@ resource "aws_instance" "MSA_pub_ec2_bastion_2a" {
   tags = {
     "Name" = "MSA_pub_ec2_bastion_2a"
   }
+
+   depends_on = [aws_eks_cluster.MSA_eks_cluster, kubernetes_config_map.aws_auth]
 }
