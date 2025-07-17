@@ -88,6 +88,13 @@ resource "aws_instance" "MSA_pub_ec2_bastion_2a" {
               kubectl create -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.crds.yaml \
                 --kubeconfig /home/ubuntu/.kube/config
 
+              # alb-controller CRD 설치
+              kubectl create -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.1/config/crd/bases/elbv2.k8s.aws_targetgroupbindings.yaml \
+                --kubeconfig /home/ubuntu/.kube/config
+
+              kubectl create -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.1/config/crd/bases/elbv2.k8s.aws_ingressclassparams.yaml \
+                --kubeconfig /home/ubuntu/.kube/config
+
               # 실행 결과 로그 저장
               echo "---- kubectl ----" > /home/ubuntu/setup.log
               kubectl version --client >> /home/ubuntu/setup.log 2>&1
