@@ -7,8 +7,8 @@ def lambda_handler(event, context):
 
     repo_path_map = {
         "multi_frontend": "mychart/frontend/values.yaml",
-        "multi_backend-users": "mychart/users/values.yaml",
-        "multi_backend-boards": "mychart/boards/values.yaml"
+        "multi_backend_users": "mychart/users/values.yaml",
+        "multi_backend_boards": "mychart/boards/values.yaml"
     }
 
     if repo not in repo_path_map:
