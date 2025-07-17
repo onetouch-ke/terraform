@@ -3,7 +3,7 @@ resource "helm_release" "argocd" {
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   namespace        = "argocd"
-  create_namespace = true
+  depends_on = [kubernetes_namespace.argocd]
 
   set {
     name  = "installCRDs"
