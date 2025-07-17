@@ -6,6 +6,11 @@ resource "helm_release" "argocd" {
   depends_on = [kubernetes_namespace.argocd]
 
   set {
+    name  = "server.extraArgs"
+    value = "{--insecure}"
+  }
+
+  set {
     name  = "installCRDs"
     value = "true"
   }
