@@ -4,5 +4,9 @@ resource "helm_release" "prometheus" {
   chart      = "prometheus"
   namespace  = "monitoring"
   version    = "25.21.0"
+
+  timeout    = 300
+  wait       = true
+  atomic     = true
   depends_on = [kubernetes_namespace.monitoring]
 }
