@@ -15,6 +15,39 @@ resource "aws_iam_role" "MSA_eks_node_group_role" {
   })
 }
 
+resource "aws_iam_policy" "custom_ebs_csi" {
+  name        = "AmazonEBSCSIDriverPolicy"
+  description = "Custom EBS CSI Driver Policy (관리형 정책이 없는 경우 사용)"
+  policy      = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+              "ec2:CreateSnapshot",
+              "ec2:DeleteSnapshot",
+              "ec2:CreateVolume",
+              "ec2:DeleteVolume",
+              "ec2:AttachVolume",
+              "ec2:DetachVolume",
+              "ec2:ModifyVolume",
+              "ec2:DescribeAvailabilityZones",
+              "ec2:DescribeInstances",
+              "ec2:DescribeSnapshots",
+              "ec2:DescribeTags",
+              "ec2:DescribeVolumes",
+              "ec2:DescribeVolumesModifications",
+              "ec2:CreateTags",
+              "ec2:DeleteTags"
+              ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+
 # IAM Role에 정책 추가
 resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
@@ -57,6 +90,13 @@ resource "aws_eks_node_group" "MSA_eks_node_group" {
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
-    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
+    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
   ]
+}
+
+resource "aws_iam_role_policy_attachment" "AmazonEBSCSIDriverPolicy" {
+  policy_arn = aws_iam_policy.custom_ebs_csi.arn
+  role       = aws_iam_role.MSA_eks_node_group_role.name
+
+  depends_on = [aws_iam_policy.custom_ebs_csi]
 }
