@@ -13,5 +13,5 @@ resource "aws_ecr_repository" "repos" {
 }
 
 variable "ecr_repositories" {
-  default = ["multi-frontend", "multi-backend-users", "multi-backend-boards"]
+  default = ["multi_frontend", "multi_backend_users", "multi_backend_boards"]
 }
