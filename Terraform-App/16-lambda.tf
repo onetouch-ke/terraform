@@ -13,7 +13,7 @@ resource "aws_lambda_function" "deploy_lambda" {
 
   environment {
     variables = {
-      TERRAFORM_GIT = "https://github.com/your-org/terraform.git"
+      TERRAFORM_GIT = "https://github.com/onetouch-ke/terraform.git"
     }
   }
 }
