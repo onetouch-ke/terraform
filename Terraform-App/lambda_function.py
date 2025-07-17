@@ -6,9 +6,9 @@ def lambda_handler(event, context):
     image_tag = event["detail"]["image-tag"]
 
     repo_path_map = {
-        "multi-frontend": "mychart/frontend/values.yaml",
-        "multi-backend-users": "mychart/users/values.yaml",
-        "multi-backend-boards": "mychart/boards/values.yaml"
+        "multi_frontend": "mychart/frontend/values.yaml",
+        "multi_backend-users": "mychart/users/values.yaml",
+        "multi_backend-boards": "mychart/boards/values.yaml"
     }
 
     if repo not in repo_path_map:
