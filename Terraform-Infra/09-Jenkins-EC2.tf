@@ -30,21 +30,20 @@ resource "aws_instance" "Jenkins" {
   subnet_id                   = aws_subnet.MSA_pub_subnet_2a.id
   key_name                    = "ch-01"
   associate_public_ip_address = true
-  iam_instance_profile    = aws_iam_instance_profile.jenkins_profile.name
-
+  iam_instance_profile        = aws_iam_instance_profile.jenkins_profile.name
+  
   user_data = <<-EOF
               #!/bin/bash
-              set -e
+              export DEBIAN_FRONTEND=noninteractive
 
               # 1. 필수 패키지 설치
-              apt-get update -y
-              apt-get install -y openjdk-17-jdk curl gnupg2 git
-              apt install -y unzip curl
+              apt update -y
+              apt install -y openjdk-17-jdk curl gnupg2 git unzip
 
               # 2. AWS CLI 설치
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip
-              sudo apt install awscli
+              ./aws/install
 
 
               # 3. Jenkins 저장소 및 키 등록
@@ -52,8 +51,8 @@ resource "aws_instance" "Jenkins" {
               echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 
               # 4. Jenkins 설치
-              apt-get update -y
-              apt-get install -y jenkins
+              apt update -y
+              apt install -y jenkins
 
               # 5. Jenkins 서비스 시작 및 자동 실행 설정
               systemctl daemon-reload
@@ -70,7 +69,7 @@ resource "aws_instance" "Jenkins" {
     tags = {
       "Name" = "Jenkins"
     }
-  }
+  } 
 
   tags = {
     "Name" = "Jenkins"
