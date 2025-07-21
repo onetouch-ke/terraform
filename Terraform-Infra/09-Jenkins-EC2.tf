@@ -34,10 +34,10 @@ resource "aws_instance" "Jenkins" {
 
   user_data = <<-EOF
                #!/bin/bash
-              set -eux
+              #set -eux
 
               # 1. 필수 패키지 설치
-              apt-get update -y
+              #apt-get update -y
               apt-get install -y openjdk-17-jdk curl gnupg2 git
 
               # 2. Jenkins 저장소 및 키 등록
@@ -69,4 +69,3 @@ resource "aws_instance" "Jenkins" {
     "Name" = "Jenkins"
   }
 }
-
