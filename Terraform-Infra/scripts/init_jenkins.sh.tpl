@@ -21,6 +21,8 @@ apt install -y jenkins
 systemctl disable jenkins
 systemctl stop jenkins || true
 
+public_ip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+
 mkdir -p /var/lib/jenkins/init.groovy.d
 cat <<'EOT' > /var/lib/jenkins/init.groovy.d/basic-security.groovy
 import jenkins.model.*

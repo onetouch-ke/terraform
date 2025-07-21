@@ -42,14 +42,11 @@ resource "aws_security_group" "jenkins_sg" {
 
 data "template_file" "jenkins_user_data" {
   template = file("${path.module}/scripts/init_jenkins.sh.tpl")
-  vars = {
-    public_ip = "REPLACE_ME_WITH_ACTUAL_PUBLIC_IP"
-  }
 }
 
 resource "aws_instance" "jenkins" {
   ami                         = "ami-056a29f2eddc40520"
-  instance_type               = "t2.medium"
+  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.MSA_pub_subnet_2a.id
   associate_public_ip_address = true
   key_name                    = "ch-01"
