@@ -80,7 +80,7 @@ resource "aws_db_instance" "MSA_mariadb_rds" {
   db_name                = "MSA_mariadb_rds"
   username               = "MSA_User"
   password               = var.rds_password
-  parameter_group_name   = aww_db_parameter_group.MSA_mariadb_parameter_group.name
+  parameter_group_name   = aws_db_parameter_group.MSA_mariadb_parameter_group.name
   skip_final_snapshot    = true
   db_subnet_group_name   = aws_db_subnet_group.MSA_rds_subnet_group.name
   vpc_security_group_ids = [aws_security_group.MSA_sg_rds.id]
