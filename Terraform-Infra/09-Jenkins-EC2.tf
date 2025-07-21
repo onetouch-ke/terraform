@@ -1,4 +1,4 @@
-resource "aws_instance" "MSA_pub_ec2_bastion_2a" {
+resource "aws_instance" "MSA_pub_ec2_Jenkins_2a" {
   ami                         = "ami-0cd4eb0ae8debf650"
   instance_type               = "t2.medium"
   vpc_security_group_ids      = [aws_security_group.MSA_sg_bastion.id]
