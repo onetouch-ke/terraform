@@ -23,7 +23,7 @@ resource "aws_iam_instance_profile" "jenkins_profile" {
   role = aws_iam_role.jenkins_role.name
 }
 
-resource "aws_instance" "MSA_pub_ec2_jenkins_2a" {
+resource "aws_instance" "Jenkins" {
   ami                         = "ami-056a29f2eddc40520"
   instance_type               = "t3.medium"
   vpc_security_group_ids      = [aws_security_group.MSA_sg_bastion.id]
