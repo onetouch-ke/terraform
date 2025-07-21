@@ -6,5 +6,5 @@ backend:
 
 mariadb:
   port: 3306
-  userName: ""
-  rootPassword: ""
+  userName: MSA_User
+  rootPassword: passw0rd
