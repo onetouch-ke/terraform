@@ -21,8 +21,6 @@ apt install -y jenkins
 systemctl disable jenkins
 systemctl stop jenkins || true
 
-public_ip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
-
 mkdir -p /var/lib/jenkins/init.groovy.d
 cat <<'EOT' > /var/lib/jenkins/init.groovy.d/basic-security.groovy
 import jenkins.model.*
@@ -47,5 +45,10 @@ echo "2.519" > /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
 
 chown -R jenkins:jenkins /var/lib/jenkins
 
+wget -P /var/lib/jenkins/plugins/ https://updates.jenkins-ci.org/latest/generic-webhook-trigger.hpi
+chown -R jenkins:jenkins /var/lib/jenkins/plugins/generic-webhook-trigger.hpi
+
 systemctl enable jenkins
 systemctl start jenkins
+
+apt install -y git
