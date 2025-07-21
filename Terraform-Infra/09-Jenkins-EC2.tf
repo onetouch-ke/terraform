@@ -44,8 +44,8 @@ resource "aws_instance" "Jenkins" {
               # 2. AWS CLI 설치
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip
+              sudo apt install awscli
 
-              ./aws/install
 
               # 3. Jenkins 저장소 및 키 등록
               curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
