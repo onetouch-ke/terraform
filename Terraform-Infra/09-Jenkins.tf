@@ -42,6 +42,9 @@ resource "aws_security_group" "jenkins_sg" {
 
 data "template_file" "jenkins_user_data" {
   template = file("${path.module}/scripts/init_jenkins.sh.tpl")
+  vars = {
+    public_ip = "REPLACE_ME_WITH_ACTUAL_PUBLIC_IP"
+  }
 }
 
 resource "aws_instance" "jenkins" {
