@@ -33,23 +33,28 @@ resource "aws_instance" "Jenkins" {
   iam_instance_profile    = aws_iam_instance_profile.jenkins_profile.name
 
   user_data = <<-EOF
-              #!/bin/bash
-              set -e
+               #!/bin/bash
+              set -eux
 
-              # === 1. Java 17 설치 (OpenJDK 버전 사용) ===
-              apt update -y
-              apt install -y openjdk-17-jdk
+              # 1. 필수 패키지 설치
+              apt-get update -y
+              apt-get install -y openjdk-17-jdk curl gnupg2 git
 
-              # === 2. Jenkins 저장소 추가 및 설치 ===
+              # 2. Jenkins 저장소 및 키 등록
               curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
               echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 
-              apt update -y
-              apt install -y jenkins
+              # 3. Jenkins 설치
+              apt-get update -y
+              apt-get install -y jenkins
 
-              # === 4. Git 설치 ===
-              apt install -y git
-              
+              # 4. Jenkins 서비스 시작 및 자동 실행 설정
+              systemctl daemon-reload
+              systemctl enable jenkins
+              systemctl start jenkins
+
+              # 5. 확인용 로그 출력
+              echo "✅ Jenkins 설치 및 실행 완료"
               EOF
 
   root_block_device {
