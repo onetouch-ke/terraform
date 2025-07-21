@@ -38,8 +38,7 @@ resource "aws_instance" "Jenkins" {
 
               # 1. 필수 패키지 설치
               apt-get update -y
-              apt-get install -y openjdk-17-jdk curl gnupg2 git
-              apt install -y unzip curl
+              apt-get install -y openjdk-17-jdk curl gnupg2 git unzip
 
               # 2. AWS CLI 설치
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
