@@ -40,6 +40,7 @@ resource "aws_instance" "Jenkins" {
               apt update -y
               apt install -y openjdk-17-jdk curl gnupg2 git unzip
 
+
               # 2. AWS CLI 설치
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip
