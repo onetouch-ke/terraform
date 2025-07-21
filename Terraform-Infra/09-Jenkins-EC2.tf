@@ -26,7 +26,7 @@ resource "aws_iam_instance_profile" "jenkins_profile" {
 resource "aws_instance" "Jenkins" {
   ami                         = "ami-056a29f2eddc40520"
   instance_type               = "t3.medium"
-  vpc_security_group_ids      = [aws_security_group.MSA_sg_bastion.id]
+  vpc_security_group_ids      = [aws_security_group.jenkins_sg.id]
   subnet_id                   = aws_subnet.MSA_pub_subnet_2a.id
   key_name                    = "ch-01"
   associate_public_ip_address = true
@@ -67,5 +67,36 @@ resource "aws_instance" "Jenkins" {
 
   tags = {
     "Name" = "Jenkins"
+  }
+}
+
+resource "aws_security_group" "jenkins_sg" {
+  name        = "jenkins-sg"
+  description = "Allow Jenkins and SSH"
+  vpc_id      = aws_vpc.MSA_vpc.id
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "jenkins-sg"
   }
 }
