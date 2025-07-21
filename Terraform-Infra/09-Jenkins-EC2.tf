@@ -25,7 +25,7 @@ resource "aws_iam_instance_profile" "jenkins_profile" {
 
 resource "aws_instance" "MSA_pub_ec2_jenkins_2a" {
   ami                         = "ami-0ff0bbc5968fcbc61"
-  instance_type               = "t2.medium"
+  instance_type               = "t3.medium"
   vpc_security_group_ids      = [aws_security_group.MSA_sg_bastion.id]
   subnet_id                   = aws_subnet.MSA_pub_subnet_2a.id
   key_name                    = "ch-01"
