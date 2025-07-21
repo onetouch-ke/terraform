@@ -33,11 +33,11 @@ resource "aws_instance" "Jenkins" {
   iam_instance_profile    = aws_iam_instance_profile.jenkins_profile.name
 
   user_data = <<-EOF
-               #!/bin/bash
-              #set -eux
+              #!/bin/bash
+              set -e
 
               # 1. 필수 패키지 설치
-              #apt-get update -y
+              apt-get update -y
               apt-get install -y openjdk-17-jdk curl gnupg2 git
 
               # 2. Jenkins 저장소 및 키 등록
