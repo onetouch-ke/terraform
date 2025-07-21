@@ -34,36 +34,34 @@ resource "aws_instance" "MSA_pub_ec2_jenkins_2a" {
 
   user_data = <<-EOF
               #!/bin/bash
+              set -e
+
+              # === 1. Java 17 설치 (OpenJDK 버전 사용) ===
               apt update -y
+              apt install -y openjdk-17-jdk
 
-              apt install java-17-amazon-corretto -y
+              # === 2. Jenkins 저장소 추가 및 설치 ===
+              curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+              echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 
-              curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
-                /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+              apt update -y
+              apt install -y jenkins
 
-              echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-                https://pkg.jenkins.io/debian binary/ | sudo tee \
-                /etc/apt/sources.list.d/jenkins.list > /dev/null
-
-              apt install jenkins -y  
-
-              systemctl enable jenkins
-              systemctl start jenkins
-
-              apt -y install git
-
+              # === 4. Git 설치 ===
+              apt install -y git
+              
               EOF
 
   root_block_device {
     volume_size = "8"
     volume_type = "gp2"
     tags = {
-      "Name" = "MSA_pub_ec2_jenkins_2a"
+      "Name" = "Jenkins"
     }
   }
 
   tags = {
-    "Name" = "MSA_pub_ec2_jenkins_2a"
+    "Name" = "Jenkins"
   }
 }
 
