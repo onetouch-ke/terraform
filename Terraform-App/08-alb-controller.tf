@@ -1,7 +1,6 @@
 resource "helm_release" "alb_controller" {
   name             = "aws-load-balancer-controller"
-  repository       = "${path.module}/../alb-controller"
-  chart            = "aws-load-balancer-controller"
+  chart            = "${path.module}/../alb-controller"
   namespace        = "kube-system"
   version          = "1.6.2" 
   
