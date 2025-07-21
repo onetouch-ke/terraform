@@ -44,7 +44,7 @@ resource "aws_instance" "Jenkins" {
               # 2. AWS CLI 설치
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip
-              apt install -y awscli
+              ./aws/install
 
 
               # 3. Jenkins 저장소 및 키 등록
