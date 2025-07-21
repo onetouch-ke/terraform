@@ -39,11 +39,13 @@ resource "aws_instance" "Jenkins" {
               # 1. 필수 패키지 설치
               apt-get update -y
               apt-get install -y openjdk-17-jdk curl gnupg2 git
+              apt install -y unzip curl
 
               # 2. AWS CLI 설치
-              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-              unzip /tmp/awscliv2.zip -d /tmp
-              /tmp/aws/install
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+
+              ./aws/install
 
               # 3. Jenkins 저장소 및 키 등록
               curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
