@@ -2,6 +2,8 @@ resource "helm_release" "msa_front" {
   name       = "msa-front"
   chart      = "${path.module}/../mychart/frontend"
   namespace  = "default"
+
+  depends_on = [helm_release.alb_controller]
 }
 
 resource "helm_release" "msa_boards" {
@@ -18,6 +20,8 @@ resource "helm_release" "msa_boards" {
     name  = "mariadb.rootPassword"
     value = var.rds_password
   }
+
+  depends_on = [helm_release.alb_controller]
 }
 
 resource "helm_release" "msa_users" {
@@ -34,6 +38,8 @@ resource "helm_release" "msa_users" {
     name  = "mariadb.rootPassword"
     value = var.rds_password
   }
+
+  depends_on = [helm_release.alb_controller]
 }
 
 # 변수 선언

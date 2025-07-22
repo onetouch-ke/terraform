@@ -9,5 +9,5 @@ resource "helm_release" "prometheus" {
     value = "ebs-sc"
   }
 
-  depends_on = [kubernetes_namespace.monitoring]
+  depends_on = [kubernetes_namespace.monitoring, helm_release.alb_controller]
 }
