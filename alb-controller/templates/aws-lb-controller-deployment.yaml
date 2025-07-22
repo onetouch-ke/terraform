@@ -37,4 +37,3 @@ spec:
         - name: webhook-cert
           secret:
             secretName: {{ .Values.webhook.certSecretName }}
-
