@@ -1,7 +1,7 @@
 backend:
   boards:
     image: 013958955750.dkr.ecr.ap-northeast-2.amazonaws.com/multi_backend_boards
-    tag: 8
+    tag: 9
     port: 8080
 
 mariadb:
