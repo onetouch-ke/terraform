@@ -26,6 +26,7 @@ spec:
         env:
         - name: SPRING_DATASOURCE_URL
           value: jdbc:mariadb://msa-mariadb-rds.cxca0yecyzdl.ap-northeast-2.rds.amazonaws.com/UsersService
+
         - name: SPRING_DATASOURCE_USERNAME
           value: "{{ .Values.mariadb.userName }}"
         - name: SPRING_DATASOURCE_PASSWORD
