@@ -108,6 +108,7 @@ resource "null_resource" "init_rds_sql" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/init_rds.sh",
+      "sleep 30",
       "bash /tmp/init_rds.sh"
     ]
   }
