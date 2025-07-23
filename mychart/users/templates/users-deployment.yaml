@@ -25,7 +25,7 @@ spec:
         - containerPort: {{ .Values.backend.users.port }}
         env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mariadb://msa-mariadb-rds2025072301433588140000000c.cxca0yecyzdl.ap-northeast-2.rds.amazonaws.com/UsersService
+          value: jdbc:mariadb://msa-mariadb-rds.cxca0yecyzdl.ap-northeast-2.rds.amazonaws.com/UsersService
 
         - name: SPRING_DATASOURCE_USERNAME
           value: "{{ .Values.mariadb.userName }}"
