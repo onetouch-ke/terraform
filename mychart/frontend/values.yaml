@@ -1,4 +1,4 @@
 frontend:
   image: 013958955750.dkr.ecr.ap-northeast-2.amazonaws.com/multi_frontend
-  tag: 16
+  tag: 19
   port: 80
