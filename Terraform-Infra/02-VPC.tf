@@ -6,4 +6,3 @@ resource "aws_vpc" "MSA_vpc" {
     "Name" = "MSA_vpc"
   }
 }
-
